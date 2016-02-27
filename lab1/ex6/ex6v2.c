@@ -64,9 +64,10 @@ int main(void) {
 
 
   if(y >= REF_YEAR) {
-    if(m < 3 && y == REF_YEAR) num_days += d;
+    if(m < 3) num_days += d;
     else num_days += d+1;
     dayofweek = num_days % 7;
+    printf("Dias: %d\n", num_days);
 
   }
   else {
@@ -95,6 +96,9 @@ int main(void) {
     printf("Sexta-feira\n");
     break;
     case 7:
+    printf("Sábado\n");
+    break;
+    default:
     printf("Sábado\n");
     break;
 
