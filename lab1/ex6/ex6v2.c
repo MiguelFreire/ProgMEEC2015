@@ -13,7 +13,7 @@ int main(void) {
   printf("Data:\n");
 
   scanf("%d/%d/%d", &d, &m, &y);
-  while((d < 1) || (d > 31) || (m < 1) || ( m > 12) || (m == 2 && y%4 == 0 && d > 28) || (m==2 && y%4 != 0 && d > 29) ) {
+  while((d < 1) || (d > 31) || (m < 1) || ( m > 12) || (m == 2 && y%4 == 0 && d > 29) || (m==2 && y%4 != 0 && d > 28) ) {
     printf("Formato de data errado! Digite novamente a data:\n");
     scanf("%d/%d/%d", &d, &m, &y);
   }
@@ -67,7 +67,7 @@ int main(void) {
     if(m < 3) num_days += d;
     else num_days += d+1;
     dayofweek = num_days % 7;
-    printf("Dias: %d\n", num_days);
+    
 
   }
   else {
