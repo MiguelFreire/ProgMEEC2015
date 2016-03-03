@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 int main(void){
@@ -6,15 +7,20 @@ int main(void){
   ax^2 + bx + c = 0, a>=0 */
   double a, b, c, discr;
   printf("Escreva os valores de a (>=0), b e c: ");
-  scanf("%f %f %f", &a, &b, &c);
-  printf("%f\n %f\n %f\n", a,b,c);
+  scanf("%lf %lf %lf", &a, &b, &c);
+  printf("%lf\n %lf\n %lf\n", a,b,c);
   discr = ((b*b) - (4*a*c));
-  printf("%f\n", discr);
+  printf("%lf\n", discr);
   if(discr < 0) {
     printf("Raizes complexas !\n");
   } else {
-    printf("Maior raiz = %e\n", (-b -sqrt(discr))/(2*a) );
+    if(a > 0) {
+      printf("Maior raiz = %e\n", (-b + sqrt(discr))/(2*a) );
+    } else {
+      printf("Maior raiz = %e\n", (-b - sqrt(discr))/(2*a) );
+    }
+
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }

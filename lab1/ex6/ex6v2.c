@@ -5,27 +5,41 @@
 #define REF_MONTH 1 // Mês de referencia
 #define REF_DAY 1 // Dia de referencia
 
+
+unsigned char isLeap(int ano) {
+  if (( ano % 4 == 0 && ano % 100 != 0 ) || ano % 400 == 0 ) return 1;
+  return 0;
+}
+
 int main(void) {
 
   int d,m,y, num_days, ab, ac, dayofweek;
   int dif;
+  unsigned char leap;
   //HANDLE YEAR
   printf("Data:\n");
 
   scanf("%d/%d/%d", &d, &m, &y);
-  while((d < 1) || (d > 31) || (m < 1) || ( m > 12) || (m == 2 && y%4 == 0 && d > 28) || (m==2 && y%4 != 0 && d > 29) ) {
+  leap = isLeap(y);
+
+  while((d < 1) || (d > 31) || (m < 1) || ( m > 12) || (m == 2 && leap && d > 28) || (m==2 && !leap && d > 29) ) {
     printf("Formato de data errado! Digite novamente a data:\n");
     scanf("%d/%d/%d", &d, &m, &y);
   }
   dif = y - REF_YEAR;
-  ab = dif/4;
+  printf("Dif: %d\n", dif);
+  for(int i = 0; i<= abs(dif); i++ ) {
+    if(isLeap(y-((dif/abs(dif))*i))) ab++;
+    printf("AB: %d\n", ab);
+
+  }
+
+
   ac = dif - ab;
   num_days = 366 * ab + 365*ac;
 
   //Handle Month
  switch (m) {
-    case 1:
-    break;
     case 2:
       num_days += 31;
     break;
@@ -64,15 +78,13 @@ int main(void) {
 
 
   if(y >= REF_YEAR) {
-    if(m < 3) num_days += d;
-    else num_days += d+1;
+    if(leap && m < 3) num_days += d+1;
+    else num_days += d;
     dayofweek = num_days % 7;
-    printf("Dias: %d\n", num_days);
-
   }
   else {
-    num_days += d;
-    dayofweek = 7 + (num_days % 7);
+
+    dayofweek = num_days % 7;
 
   }
   printf("Dia da semana:");
