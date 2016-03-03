@@ -28,13 +28,19 @@ int main(void) {
   }
   dif = y - REF_YEAR;
   printf("Dif: %d\n", dif);
-  for(int i = 0; i<= abs(dif); i++ ) {
-    if(isLeap(y-((dif/abs(dif))*i))) ab++;
-    printf("AB: %d\n", ab);
+
+  if(y > REF_YEAR) {
+    for(int i = 0; i< abs(dif); i++ ) {
+      if (isLeap(REF_YEAR+i)) ab++;
+      printf("%d\n", ab);
+    }
+  } else {
+    for(int i = 0; i< abs(dif); i++ ) {
+      if (isLeap(y+i)) ab--;
+      printf("%d\n", ab);
+    }
 
   }
-
-
   ac = dif - ab;
   num_days = 366 * ab + 365*ac;
 
@@ -75,43 +81,43 @@ int main(void) {
     break;
   }
 
+  d--;
+  if(leap && m > 2) num_days = num_days + d + 1;
+  else num_days = num_days + d;
 
-
-  if(y >= REF_YEAR) {
-    if(leap && m < 3) num_days += d+1;
-    else num_days += d;
+  if(y > REF_YEAR) {
     dayofweek = num_days % 7;
-  }
-  else {
-
+  } else {
     dayofweek = num_days % 7;
+    dayofweek = (7 - dayofweek) % 7;
+
 
   }
   printf("Dia da semana:");
   switch (dayofweek) {
-    case 1:
+    case 0:
     printf("Domingo\n");
     break;
-    case 2:
+    case 1:
     printf("Segunda-feira\n");
     break;
-    case 3:
+    case 2:
     printf("Terça-feira\n");
     break;
-    case 4:
+    case 3:
     printf("Quarta-feira\n");
     break;
-    case 5:
+    case 4:
     printf("Quinta-feira\n");
     break;
-    case 6:
+    case 5:
     printf("Sexta-feira\n");
     break;
-    case 7:
+    case 6:
     printf("Sábado\n");
     break;
     default:
-    printf("Sábado\n");
+    printf("ERRO\n");
     break;
 
   }
