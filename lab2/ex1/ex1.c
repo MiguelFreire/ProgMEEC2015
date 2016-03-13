@@ -5,14 +5,14 @@ int calcula_digito_controlo(int nic[]);
 int cc_valido(int nic[], int c);
 
 int controlo[] = {9,8,7,6,5,4,3,2};
-//14678962 8
+
 int main(void) {
   int vector[7];
 
   int unsigned nic;
   int dc;
 
-  printf("Insira NIF:\n");
+  printf("Insira NIC:\n");
   scanf("%d", &nic);
 
   int k=7;
