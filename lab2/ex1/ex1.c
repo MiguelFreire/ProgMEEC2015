@@ -36,13 +36,23 @@ int main(void) {
 
 }
 
+/*
+Function
+@name: cc_valido
+@desc: Verifica a validade de um cartão de cidadão
+*/
+
 int cc_valido(int nic[], int c) {
   int dc = calcula_digito_controlo(nic);
   printf("%d\n", dc);
   if(dc == c) return 1;
   return 0;
 }
-
+/*
+Function
+@name: calcula_digito_controlo
+@desc: Calcula o digito de controlo
+*/
 int calcula_digito_controlo(int nic[]) {
   int sum;
   for(int n = 0; n <= 7; n++) {

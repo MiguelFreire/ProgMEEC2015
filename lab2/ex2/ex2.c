@@ -7,9 +7,9 @@ int menu();
 
 int main(void) {
   while(1) {
-    int op = menu();
-    int n;
-    int cn;
+    int op = menu(); //menu
+    int n; //Número
+    int cn; //Número convertido
     if(op == 3) return 0;
     printf("Insira um número:\n");
     scanf("%d", &n);
@@ -22,20 +22,28 @@ int main(void) {
 
   }
 }
-
+/*
+Converte um número decimal em binário
+@param[in]: int n (número decimal a converter)
+@return: int bin (numéro binario convertido)
+*/
 int convert_to_bin(int n) {
-  int resto, i, binary;
+  int resto, i, bin;
   i=1;
   while(n!=0) {
     resto = n%2;
     n /= 2;
-    binary += resto*i;
+    bin += resto*i;
     i *=10;
   }
 
-  return binary;
+  return bin;
 }
-
+/*
+Converte um número binario em decimal
+@param[in]: int n (número binario a converter)
+@return: int decimal (numéro decimal convertido)
+*/
 int convert_to_dec(int n) {
   int resto, i, decimal;
   i=0;
@@ -48,6 +56,12 @@ int convert_to_dec(int n) {
 
   return decimal;
 }
+
+/*
+Apresenta o menu
+@param: void
+@return: int op (operação a ser efetuada)
+*/
 
 int menu() {
   int op;
@@ -62,6 +76,9 @@ int menu() {
   printf("//////////////////////////////\n");
 
   scanf("%d", &op);
-  if(op < 1 || op > 3) return menu();
+  if(op < 1 || op > 3) {
+    printf("Por-favor escolha uma das opções validas\n");
+    return menu();
+  }
   return op;
 }

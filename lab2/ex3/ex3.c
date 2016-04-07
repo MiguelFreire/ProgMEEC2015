@@ -51,7 +51,11 @@ int main(void) {
   }
   return 0;
 }
-
+/*
+Function
+@name: changeToCoins
+@desc: Converto o troco em moedas
+*/
 void changeToCoins(float change, int coins[]) {
   float d;
   for(int i = 0; i <= 6 ; i++) {
