@@ -5,8 +5,8 @@ void createMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], int matrix_size[][
 void fillMatrix(float matrix[][MAX_SIZE], int matrix_size[]);
 void printMatrix(float matrix[][MAX_SIZE], int matrix_size[]);
 void createMatrix(float matrix[][MAX_SIZE], int matrix_size[]);
-void sumMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], int matrix_size[][2] );
-void multiplyMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], float C[][MAX_SIZE], int matrix_size[][2]);
+int sumMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], int matrix_size[][2] );
+int multiplyMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], float C[][MAX_SIZE], int matrix_size[][2]);
 int menu();
 
 int main(void) {
@@ -24,14 +24,16 @@ int main(void) {
     int menu_op = menu();
     switch (menu_op) {
       case 1:
-        sumMatrixes(A,B, matrix_size);
-        printf("Matrix A:\n");
-        printMatrix(A, matrix_size[2]);
+        if(sumMatrixes(A,B, matrix_size)) {
+          printf("Matrix A:\n");
+          printMatrix(A, matrix_size[0]);
+        }
         break;
       case 2:
-        multiplyMatrixes(A,B,C,matrix_size);
-        printf("Matrix C:\n");
-        printMatrix(C, matrix_size[2]);
+        if(multiplyMatrixes(A,B,C,matrix_size)) {
+          printf("Matrix C:\n");
+          printMatrix(C, matrix_size[2]);
+        }
         break;
       case 3:
         return 0;
@@ -41,23 +43,37 @@ int main(void) {
   }
   return 1;
 }
-
-void sumMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], int matrix_size[][2]) {
+/**
+ * Sum two given matrixes, saves it in the 1st matrix
+ * @param A           [1st matrix]
+ * @param B           [2nd matrix]
+ * @param matrix_size [size of the matrixes]
+ * @return int        [status flag: 0 - FAIL, 1 - OK]
+ */
+int sumMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], int matrix_size[][2]) {
   if(matrix_size[0][0] != matrix_size[1][0] || matrix_size[0][1] != matrix_size[1][1]) {
     printf("As dimensões das matrizes tem de ser identicas para poderem ser somadas\n");
-    return;
+    return 0;
   }
   for(int n=0; n < matrix_size[0][0]; n++) {
     for(int m=0; m < matrix_size[0][1]; m++) {
       A[n][m] = A[n][m]+B[n][m];
     }
   }
+  return 1;
 }
-
-void multiplyMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], float C[][MAX_SIZE], int matrix_size[][2]) {
+/**
+ * Multiply two given matrixes, saves it in a 3rd matrix
+ * @param A           [1st matrix]
+ * @param B           [2nd matrix]
+ * @param C           [3rd matrix]
+ * @param matrix_size [size of the matrixes]
+ * @return int        [status flag: 0 - FAIL, 1 - OK]
+ */
+int multiplyMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], float C[][MAX_SIZE], int matrix_size[][2]) {
   if(matrix_size[0][1] != matrix_size[1][0]) {
     printf("O número de linhas da primeira matriz tem de ser igual ao numero de colunas da segunda!\n");
-    return;
+    return 0;
   }
   matrix_size[2][0] = matrix_size[0][0];
   matrix_size[2][1] = matrix_size[1][1];
@@ -71,13 +87,25 @@ void multiplyMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], float C[][MAX_SI
       }
     }
   }
+  return 1;
 }
-
+/**
+ * Create two matrixes
+ * @param A           [1st matrix]
+ * @param B           [2nd matrix]
+ * @param matrix_size [size of the matrixes]
+ * @return void
+ */
 void createMatrixes(float A[][MAX_SIZE], float B[][MAX_SIZE], int matrix_size[][2]) {
     createMatrix(A, matrix_size[0]);
     createMatrix(B, matrix_size[1]);
 }
-
+/**
+ * Create a nxm matrix
+ * @param matrix           [1st matrix]
+ * @param matrix_size      [size of the matrix]
+ * @return void
+ */
 void createMatrix(float matrix[][MAX_SIZE], int matrix_size[]) {
   int tmp;
   printf("Número de linhas e colunas da matriz?(formato nxm, valor maximo de n e m =15)\n");
@@ -93,7 +121,12 @@ void createMatrix(float matrix[][MAX_SIZE], int matrix_size[]) {
     }
   }
 }
-
+/**
+ * Print the matrix
+ * @param matrix      [matrix to print]
+ * @param matrix_size [size of the matrix]
+ * @return void
+ */
 void printMatrix(float matrix[][MAX_SIZE], int matrix_size[]) {
   for(int n=0; n < matrix_size[0]; n++) {
     printf("[");
@@ -103,13 +136,16 @@ void printMatrix(float matrix[][MAX_SIZE], int matrix_size[]) {
     printf("]\n");
   }
 }
-
+/**
+ * Shows a menu
+ * @return int op
+ */
 int menu() {
   int op;
 
   printf("///////////////////////////////\n");
   printf("/                             /\n");
-  printf("/          Conversor          /\n");
+  printf("/   Calculadora de matrizes   /\n");
   printf("/   1 -  Soma de matrizes     /\n");
   printf("/   2 -  Producto de matrizes /\n");
   printf("/   3 -  Sair                 /\n");
