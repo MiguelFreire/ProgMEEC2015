@@ -1,0 +1,20 @@
+Player Name: Player 1
+ Games Won/Tied/Lost: 0/0/1
+ Final money: 6
+ House money earned or lost: 2
+
+Player Name: Player 2
+ Games Won/Tied/Lost: 0/0/1
+ Final money: 6
+ House money earned or lost: 2
+
+Player Name: Player 3
+ Games Won/Tied/Lost: 0/0/0
+ Final money: 6
+ House money earned or lost: 0
+
+Player Name: Player 4
+ Games Won/Tied/Lost: 0/0/1
+ Final money: 6
+ House money earned or lost: 2
+
